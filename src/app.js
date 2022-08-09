@@ -8,7 +8,15 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req,res) => {
-    res.send('Hello,World!')
+    
+    res
+    .status(200)
+    .send('Hello,Túlio')
+
+})
+
+app.post('/', (req, res) => {
+    res.send("funcionou")
 })
 
 export default app;

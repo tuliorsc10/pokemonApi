@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node ./src/server.js"
+    "dev": "nodemon ./src/server.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,15 @@
   "homepage": "https://github.com/tuliorsc10/pokemonApi#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.1"
+    "docker-compose": "^0.23.17",
+    "express": "^4.18.1",
+    "path": "^0.12.7",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.21.3",
+    "sequelize-cli": "^6.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
