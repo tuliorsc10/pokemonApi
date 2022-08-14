@@ -55,6 +55,8 @@ class PokemonController {
     static async comparaPokemon(req,res) {
         const {id} = req.params;
         const {novoId} = req.params
+        const playerOne = await database.Vitorias.findAll()
+        console.log(playerOne)
         try {
             const primeiroPokemon = await database.Pokemons.findOne( { where: {id: Number(id)}})
             const segundoPokemon = await database.Pokemons.findOne( { where: {id: Number(novoId)}})
@@ -79,9 +81,9 @@ class PokemonController {
             }
             
             if(primeiraCarta > segundaCarta ) {
-                return res.status(200).json(primeiroPokemon)
+                return res.status(200).json({"winner":id, "loser":novoId,primeiroPokemon})
             }else {
-                return res.status(200).json(segundoPokemon)
+                return res.status(200).json({"winner":novoId, "loser":id,segundoPokemon})
             }
             
         } catch (error) {
