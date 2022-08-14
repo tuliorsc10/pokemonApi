@@ -57,39 +57,27 @@ class PokemonController {
         const {novoId} = req.params
         try {
             const primeiroPokemon = await database.Pokemons.findOne( { where: {id: Number(id)}})
-            const segundoPokemon = await database.Pokemons.findOne( { where: {id: Number(id)}})
+            const segundoPokemon = await database.Pokemons.findOne( { where: {id: Number(novoId)}})
+
             let primeiraCarta = 0;
             let segundaCarta = 0;
-            if(primeiroPokemon.hp > segundoPokemon.hp) {
-                primeiraCarta +=1
-            }else {
-                segundaCarta += 1
+
+            let propriedadePrimeiroPokemon = Object.entries(primeiroPokemon);
+            let objetoPrimeiroPokemon = propriedadePrimeiroPokemon[1][1]
+            let valorPrimeiroPokemon = Object.values(objetoPrimeiroPokemon)
+
+            let propriedadeSegundoPokemon = Object.entries(segundoPokemon);
+            let objetoSegundoPokemon = propriedadeSegundoPokemon[1][1]
+            let valorSegundoPokemon = Object.values(objetoSegundoPokemon)
+
+            for(let i = 2; i<valorPrimeiroPokemon.length-2; i++) {
+                if(valorPrimeiroPokemon[i] > valorSegundoPokemon[i]) {
+                    primeiraCarta += 1
+                } else {
+                    segundaCarta += 1
+                }
             }
-            if(primeiroPokemon.attack > segundoPokemon.attack) {
-                primeiraCarta +=1
-            }else {
-                segundaCarta += 1
-            }
-            if(primeiroPokemon.defense > segundoPokemon.defense) {
-                primeiraCarta +=1
-            }else {
-                segundaCarta += 1
-            }
-            if(primeiroPokemon.special_attack > segundoPokemon.special_attack) {
-                primeiraCarta +=1
-            }else {
-                segundaCarta += 1
-            }
-            if(primeiroPokemon.special_defense> segundoPokemon.special_defense) {
-                primeiraCarta +=1
-            }else {
-                segundaCarta += 1
-            }
-            if(primeiroPokemon.speed > segundoPokemon.speed) {
-                primeiraCarta +=1
-            }else {
-                segundaCarta += 1
-            }
+            
             if(primeiraCarta > segundaCarta ) {
                 return res.status(200).json(primeiroPokemon)
             }else {
