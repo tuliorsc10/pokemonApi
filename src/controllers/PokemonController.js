@@ -51,6 +51,55 @@ class PokemonController {
             return res.status(500).json(error.message)
         }
     }
+
+    static async comparaPokemon(req,res) {
+        const {id} = req.params;
+        const {novoId} = req.params
+        try {
+            const primeiroPokemon = await database.Pokemons.findOne( { where: {id: Number(id)}})
+            const segundoPokemon = await database.Pokemons.findOne( { where: {id: Number(id)}})
+            let primeiraCarta = 0;
+            let segundaCarta = 0;
+            if(primeiroPokemon.hp > segundoPokemon.hp) {
+                primeiraCarta +=1
+            }else {
+                segundaCarta += 1
+            }
+            if(primeiroPokemon.attack > segundoPokemon.attack) {
+                primeiraCarta +=1
+            }else {
+                segundaCarta += 1
+            }
+            if(primeiroPokemon.defense > segundoPokemon.defense) {
+                primeiraCarta +=1
+            }else {
+                segundaCarta += 1
+            }
+            if(primeiroPokemon.special_attack > segundoPokemon.special_attack) {
+                primeiraCarta +=1
+            }else {
+                segundaCarta += 1
+            }
+            if(primeiroPokemon.special_defense> segundoPokemon.special_defense) {
+                primeiraCarta +=1
+            }else {
+                segundaCarta += 1
+            }
+            if(primeiroPokemon.speed > segundoPokemon.speed) {
+                primeiraCarta +=1
+            }else {
+                segundaCarta += 1
+            }
+            if(primeiraCarta > segundaCarta ) {
+                return res.status(200).json(primeiroPokemon)
+            }else {
+                return res.status(200).json(segundoPokemon)
+            }
+            
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
 }
 
 module.exports = PokemonController;
