@@ -55,12 +55,13 @@ class PokemonController {
     }
 
     static async comparaPokemon(req,res) {
-        const {id} = req.params;
-        const {novoId} = req.params
+        
+        const playerOneCard = Number(req.body.playerOneCard)
+        const playerTwoCard = Number(req.body.playerTwoCard)
         
         try {
-            const primeiroPokemon = await database.Pokemons.findOne( { where: {id: Number(id)}})
-            const segundoPokemon = await database.Pokemons.findOne( { where: {id: Number(novoId)}})
+            const primeiroPokemon = await database.Pokemons.findOne( { where: {id: playerOneCard}})
+            const segundoPokemon = await database.Pokemons.findOne( { where: {id: Number(playerTwoCard)}})
             const player = await database.Vitorias.findAll()
             
             let propriedadePlayerOne = Object.values(player);
@@ -91,10 +92,10 @@ class PokemonController {
         
             if(primeiraCarta > segundaCarta ) {
                 await database.Vitorias.update({playerOne: alteraplayerOne}, {where: {id: Number(2)}})
-                return res.status(200).json({"winner":id, "loser":novoId,primeiroPokemon})
+                return res.status(200).json({"winner":playerOneCard, "loser":playerTwoCard,primeiroPokemon})
             }else if(primeiraCarta < segundaCarta ) {
                 await database.Vitorias.update({playerTwo: alteraplayerTwo}, {where: {id: Number(2)}})
-                return res.status(200).json({"winner":novoId, "loser":id,segundoPokemon})
+                return res.status(200).json({"winner":playerTwoCard, "loser":playerOneCard,segundoPokemon})
             }else {
                 return res.status(406).json({message:'Empate! Escolha outra carta para uma nova disputa!'})
             }
