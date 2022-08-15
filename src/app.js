@@ -1,22 +1,11 @@
-import express from 'express';
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
+const routes = require('./routes/index')
 
 const app = express();
 
-app.use(express.json());
+routes(app);
 
-app.use(cors());
 
-app.get('/', (req,res) => {
-    
-    res
-    .status(200)
-    .send('Hello,Túlio')
 
-})
-
-app.post('/', (req, res) => {
-    res.send("funcionou")
-})
-
-export default app;
+module.exports = app;
