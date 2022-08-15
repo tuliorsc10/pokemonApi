@@ -66,6 +66,7 @@ class PokemonController {
             
             let propriedadePlayerOne = Object.values(player);
             let objetoPlayerOne = propriedadePlayerOne[0].dataValues.playerOne;
+            console.log(propriedadePlayerOne)
             let alteraplayerOne = objetoPlayerOne + 1;
 
             let propriedadePlayerTwo = Object.values(player)
@@ -91,10 +92,10 @@ class PokemonController {
             }
         
             if(primeiraCarta > segundaCarta ) {
-                await database.Vitorias.update({playerOne: alteraplayerOne}, {where: {id: Number(2)}})
+                await database.Vitorias.update({playerOne: alteraplayerOne}, {where: {id: Number(1)}})
                 return res.status(200).json({"winner":playerOneCard, "loser":playerTwoCard,primeiroPokemon})
             }else if(primeiraCarta < segundaCarta ) {
-                await database.Vitorias.update({playerTwo: alteraplayerTwo}, {where: {id: Number(2)}})
+                await database.Vitorias.update({playerTwo: alteraplayerTwo}, {where: {id: Number(1)}})
                 return res.status(200).json({"winner":playerTwoCard, "loser":playerOneCard,segundoPokemon})
             }else {
                 return res.status(406).json({message:'Empate! Escolha outra carta para uma nova disputa!'})
