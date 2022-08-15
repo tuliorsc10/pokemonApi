@@ -1,4 +1,6 @@
 const database = require('../models');
+const PrimeiraCarta = require('../helpers/ComparacaoHelper')
+const SegundaCarta = require('../helpers/ComparacaoHelper')
 
 class PokemonController {
     static async pegaPokemons(req,res) {
@@ -55,37 +57,48 @@ class PokemonController {
     static async comparaPokemon(req,res) {
         const {id} = req.params;
         const {novoId} = req.params
-        const playerOne = await database.Vitorias.findAll()
-        console.log(playerOne)
+        
         try {
             const primeiroPokemon = await database.Pokemons.findOne( { where: {id: Number(id)}})
             const segundoPokemon = await database.Pokemons.findOne( { where: {id: Number(novoId)}})
+            const player = await database.Vitorias.findAll()
+            
+            let propriedadePlayerOne = Object.values(player);
+            let objetoPlayerOne = propriedadePlayerOne[0].dataValues.playerOne;
+            let alteraplayerOne = objetoPlayerOne + 1;
+
+            let propriedadePlayerTwo = Object.values(player)
+            let objetoPlayerTwo = propriedadePlayerTwo[0].dataValues.playerTwo
+            let alteraplayerTwo = objetoPlayerTwo + 1
 
             let primeiraCarta = 0;
             let segundaCarta = 0;
 
-            let propriedadePrimeiroPokemon = Object.entries(primeiroPokemon);
-            let objetoPrimeiroPokemon = propriedadePrimeiroPokemon[1][1]
-            let valorPrimeiroPokemon = Object.values(objetoPrimeiroPokemon)
-
-            let propriedadeSegundoPokemon = Object.entries(segundoPokemon);
-            let objetoSegundoPokemon = propriedadeSegundoPokemon[1][1]
-            let valorSegundoPokemon = Object.values(objetoSegundoPokemon)
+            let valorPrimeiroPokemon = PrimeiraCarta(primeiroPokemon);
+            let valorSegundoPokemon = SegundaCarta(segundoPokemon);
 
             for(let i = 2; i<valorPrimeiroPokemon.length-2; i++) {
+                if(valorPrimeiroPokemon[i] == valorSegundoPokemon[i]){
+                    primeiraCarta += 1;
+                    segundaCarta += 1;
+                } 
                 if(valorPrimeiroPokemon[i] > valorSegundoPokemon[i]) {
-                    primeiraCarta += 1
-                } else {
-                    segundaCarta += 1
+                    primeiraCarta += 1;
+                } else if(valorPrimeiroPokemon[i] < valorSegundoPokemon[i]){
+                    segundaCarta += 1;
                 }
             }
-            
+        
             if(primeiraCarta > segundaCarta ) {
+                await database.Vitorias.update({playerOne: alteraplayerOne}, {where: {id: Number(2)}})
                 return res.status(200).json({"winner":id, "loser":novoId,primeiroPokemon})
-            }else {
+            }else if(primeiraCarta < segundaCarta ) {
+                await database.Vitorias.update({playerTwo: alteraplayerTwo}, {where: {id: Number(2)}})
                 return res.status(200).json({"winner":novoId, "loser":id,segundoPokemon})
+            }else {
+                return res.status(406).json({message:'Empate! Escolha outra carta para uma nova disputa!'})
             }
-            
+
         } catch (error) {
             return res.status(500).json(error.message)
         }
