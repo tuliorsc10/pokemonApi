@@ -89,4 +89,6 @@ Depois de executado essas etapas acima realize as requisições.
        "playerTwoCard": 2
       }
       
-    Para realizar requisições utilize o postman ou insomnia, utilize os endpoints demonstrados acima. Espero que gostem!
+    Para realizar requisições utilize o postman ou insomnia, utilize os endpoints demonstrados acima. 
+    
+    Espero que gostem!
