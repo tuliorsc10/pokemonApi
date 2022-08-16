@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 3000
 
-ENTRYPOINT [ "./init.sh" ]
+CMD [ "npm", "run", "dev" ]
