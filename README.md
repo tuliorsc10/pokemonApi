@@ -1,10 +1,15 @@
-# PokemonApi
+# Desafio SomoS
+
+Linguagem: Javascript
+
+Framework: Node/Express
 
 # Introdução
 
-Esta API foi criada com intuito de aprender e demonstrar um pouco de conhecimento para o processo seletivo SomoS.
+Esta API foi desenvolvida para criar, buscar, alterar e deletar pokemons, além de comparar dois pokemons para saber qual o mais forte. 
+<br>A partir da comparação o vencedor acumula pontos, podendo ser retornado as vitórias acumuladas.
 
-# Devemos ter instalado
+## Devemos ter instalado
 
 * [docker](https://www.docker.com/);
 * [node](https://nodejs.org/en/);
@@ -12,6 +17,10 @@ Esta API foi criada com intuito de aprender e demonstrar um pouco de conheciment
 
 O postman ou insomnia também podem ser utilizados online,
 nesse caso não há necessidade de instalação.
+
+## Repositório
+
+Para baixar utilize o comando git clone;
 
 ## Tecnologias utilizadas(bibliotecas, frameworks)
 
