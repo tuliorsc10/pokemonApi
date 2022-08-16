@@ -34,38 +34,59 @@ Para baixar utilize o comando git clone;
 * [pg-hstore](https://github.com/scarney81/pg-hstore);
 * [nodemon](https://github.com/remy/nodemon);
 
-## Instalando dependências
+## Instalação/Execução
 
 Para instalar as dependências utilize o comando: 
 
-**npm install**
+`npm install`
 
 Depois de instalado execute o comando: 
 
-**docker-compose up**
+`docker-compose up`
 
-Em outro terminal execute o comando:
+A partir dos containers funcionando, abra outro terminal na pasta do repositório e execute o comando:
 
-**npx sequelize-cli db:migrate**
+`npx sequelize-cli db:migrate`
 
 Para popular o banco execute o comando:
 
-**npx sequelize-cli de:seed:all**
+`npx sequelize-cli de:seed:all`
+
+Depois de executado essas etapas acima realize as requisições.
 
 ## Lista de Endpoints
 
-* **pokemons (http://localhost:4000/pokemons)**
-    * GET / - lista de pokemons;
-    * GET /:id - busca de pokemon por ID;
-    * POST / - cria um pokemon;
-    * PUT /:id - atualiza um pokemon por ID;
-    * DELETE/:id - deleta um pokemon por ID;
-    * GET /disputacartas - compara as cartas por parâmetros escritos pelo body;
+* **pokemons**
+    * GET http://localhost:4000/pokemons/ - lista de pokemons;
+    * GET http://localhost:4000/pokemons/:id - busca de pokemon por ID;
+    * POST http://localhost:4000/pokemons/ - cria um pokemon;
+  
+    * PUT http://localhost:4000/pokemons/:id - atualiza um pokemon por ID;
+    * DELETE http://localhost:4000/pokemons/:id - deleta um pokemon por ID;
+    * GET http://localhost:4000/pokemons/disputacartas - compara as cartas por parâmetros escritos pelo body;
     
-* **players (http://localhost:4000/players)**
-    * GET / - vitórias acumulativas dos players;
+* **players**
+    * GET http://localhost:4000/players/ - vitórias acumulativas dos players;
     
 ## Realizando Requisições
-
-    Para realizar requisições utilize o postman ou insomnia,
-    utilize os endpoints demonstrados acima. Espero que gostem!
+      
+    Exemplo para realizar o post, insira essas informações no body:
+     
+     {
+         "name": "Charmander",
+         "hp": 45,
+         "attack": 60,
+         "defense": 45,
+         "special_attack": 60,
+         "special_defense": 45,
+         "speed": 60   
+      }
+      
+     Exemplo para realizar a comparação dos pokemons, insira os id's dos cards para cada player no body:
+     
+    {
+       "playerOneCard": 1,
+       "playerTwoCard": 2
+      }
+      
+    Para realizar requisições utilize o postman ou insomnia, utilize os endpoints demonstrados acima. Espero que gostem!
