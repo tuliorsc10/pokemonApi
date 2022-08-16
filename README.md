@@ -44,6 +44,14 @@ Depois de instalado execute o comando:
 
 **docker-compose up**
 
+Em outro terminal execute o comando:
+
+**npx sequelize-cli db:migrate**
+
+Para popular o banco execute o comando:
+
+**npx sequelize-cli de:seed:all**
+
 ## Lista de Endpoints
 
 * **pokemons (http://localhost:4000/pokemons)**
